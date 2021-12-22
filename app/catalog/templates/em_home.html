@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+	{% block leftnav %}
+	        <aside id="left-panel" class="left-panel">
+        <nav class="navbar navbar-expand-sm navbar-default">
+            <div id="main-menu" class="main-menu collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="{{ url_for('main.em_home')}}"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
+                    </li>
+                    <li class="menu-title">COMPONENTS</li><!-- /.menu-title -->                     
+			    <li><a href="{{ url_for('authentication.profile', Id=session.Id)}}"><i class="menu-icon fa fa-id-badge"></i>Profile</a></li>
+                            <li><a href="{{ url_for('main.display_Leave', em_id=session.Id)}}"><i class="menu-icon fa fa-file-text"></i>Leaves</a></li>
+                            <li><a href="{{ url_for('main.display_em_event')}}"> <i class="menu-icon fa fa-calendar"></i>Event</a></li>
+                   
+                 
+                    <li class="menu-title">Extras</li><!-- /.menu-title -->
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Menu</a>
+                        <ul class="sub-menu children dropdown-menu">
+			    <li><i class="menu-icon fa fa-home"></i><a href="{{ url_for('main.home')}}">Home</a></li>
+                            <li><i class="menu-icon fa fa-sign-out"></i><a href="{{ url_for('authentication.logout')}}">Log out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+    </aside>
+    <!-- /#left-panel -->
+
+        {% endblock leftnav %}
+    
+  <!--  Notice board  -->
+                <div class="row" style="padding: 30px;;">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="box-title">NOTICE BOARD </h><br><br><br><br>
+                                <h1 style="text-align:center"><strong>WELCOME TO EM-LEAVE</strong></h1>
+                                <h3 style="text-align:center">HAVE A NICE DAY</h3>
+				<br><br>
+                  		
+				<div class="container">
+				<div class="row">
+				<div class="jumbotron p-3">
+				<div class="col-lg-12">
+				{% for row in notice %}
+				<ul class="list-group list-group-flush">
+				<li class="list-group-item"><h5><i class='fa fa-circle' style='font-size:10px'></i> &ensp; {{ row.Notice }}</h5></li>
+				</ul>
+				{% endfor %}
+    				</div>
+				</div>
+				</div>
+				</div>
+                            </div>
+                        </div><!-- /# column -->
+                    </div>
+		  </div>
+                <!--  Notice board  -->
+{% endblock content %}

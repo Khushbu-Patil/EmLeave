@@ -1,0 +1,80 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+{% block leftnav %}
+	        <aside id="left-panel" class="left-panel">
+        <nav class="navbar navbar-expand-sm navbar-default">
+            <div id="main-menu" class="main-menu collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="{{ url_for('main.em_home')}}"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
+                    </li>
+                    <li class="menu-title">COMPONENTS</li><!-- /.menu-title -->                     
+			    <li class="active"><a href="{{ url_for('authentication.profile',Id=session.Id)}}"><i class="menu-icon fa fa-id-badge"></i>Profile</a></li>
+                            <li><a href="{{ url_for('main.display_Leave', em_id=session.Id)}}"><i class="menu-icon fa fa-file-text"></i>Leaves</a></li>
+                            <li><a href=""{{ url_for('main.display_em_event')}}""> <i class="menu-icon fa fa-calendar"></i>Event</a></li>
+                   
+                    <li class="menu-title">Extras</li><!-- /.menu-title -->
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Menu</a>
+                        <ul class="sub-menu children dropdown-menu">
+			    <li><i class="menu-icon fa fa-home"></i><a href="{{ url_for('authentication.logout')}}">Home</a></li>
+                            <li><i class="menu-icon fa fa-sign-out"></i><a href="{{ url_for('authentication.logout')}}">Log out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+    </aside>
+    <!-- /#left-panel -->
+
+        {% endblock leftnav %}
+
+<div class="row"     style="padding: 30px;">
+ 	<div class="col-lg-12">
+        	<div class="card">
+                	<div class="card-body">
+    				<div class="container form">
+        				<h2> Empolyee Details </h2>
+        				<hr><br><br>
+					<div class="container">
+						<div class="row">
+							<div class="jumbotron p-3">
+									{% for row in employee %}
+									<h3>
+									<b>Name:</b>  {{ row.Name }}<br><br>
+									<b>Phone:</b>  {{ row.Phone }}<br><br>
+									<b>Email:</b>  {{ row.Email_id }}<br><br>
+									<b>Deparment:</b>  {{ row.Department }}<br><br>
+									<b>Designation:</b>  {{ row.Designation }}<br><br>
+									<b>Employee Id:</b>  {{ row.Id }}<br><br>
+									</h3>
+									{% endfor %}
+							</div>
+						</div>
+					</div>
+					<a href="{{url_for('authentication.Password',Id=session.Id)}}" class="pull-right" style="color:#b0b4b8; font-size:25px; align:right;"><span class="glyphicon glyphicon-lock"></span>Update Password</a>
+				</div>
+              		</div>
+                 </div><!-- /# column -->
+         </div>
+ </div>
+
+ <div class="row" style="padding: 30px;">
+ 	<div class="col-lg-12">
+        	<div class="card">
+                	<div class="card-body">
+    				<div class="container form">
+        				<h2> Update Here </h2>
+        				<hr><br><br>
+        				{{ form.hidden_tag() }}
+					<div class="col-md-8">
+        				{{ wtf.quick_form(form) }}
+					</div>
+    				</div>
+			     	<a href="{{url_for('authentication.Password',Id=session.Id)}}" class="pull-right" style="color:#b0b4b8; font-size:25px; align:right;"><span class="glyphicon glyphicon-lock"></span>Update Password</a>
+              		</div>
+                 </div><!-- /# column -->
+         </div>
+ </div>
+{% endblock content %}
